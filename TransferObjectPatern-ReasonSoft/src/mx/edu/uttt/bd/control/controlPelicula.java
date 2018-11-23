@@ -81,7 +81,7 @@ peliculasVO peli=(peliculasVO)(obj);
 
     @Override
     public ArrayList<peliculasVO> consultarTodo() {
-        ArrayList<Object> peliL=new ArrayList<Object>();
+        ArrayList<peliculasVO> peliL=new ArrayList<peliculasVO>();
         PreparedStatement cst;
         Connection con=super.obtenerConexion();
         ResultSet rs;
