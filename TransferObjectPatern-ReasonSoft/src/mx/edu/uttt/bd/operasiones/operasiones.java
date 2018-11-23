@@ -10,5 +10,8 @@ package mx.edu.uttt.bd.operasiones;
  * @author crist
  */
 public interface operasiones {
+     boolean insertar (Object obj);
+    boolean eliminar (Object obj);
+    boolean actualizar (Object obj);
     
 }
