@@ -5,9 +5,11 @@
  */
 package mx.edu.uttt.busines;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import mx.edu.uttt.transfer.peliculasVO;
+import mx.edu.uttt.bd.control.controlPelicula;
 
 /**
  *
@@ -20,17 +22,25 @@ List<peliculasVO> peli;
     }
     
     public void deletePeliculas(peliculasVO pelicula){
+        
         JOptionPane.showMessageDialog(null, "Se eliminó la pelicula: "+pelicula.getTitulo());
     }
-   public List<peliculasVO> getAllPeliculasVO(){
+   public ArrayList<peliculasVO> getAllPeliculasVO(){
+       controlPelicula cPeli=new controlPelicula();
        
-    return peli;
+    return cPeli.consultarTodo();
     }
    public void updatePelicula(peliculasVO pelicula){
    JOptionPane.showMessageDialog(null,"Se actualizó la pelicula: "+pelicula.getTitulo() );
     }
    public void addPelicula(peliculasVO pelicula){
-   JOptionPane.showMessageDialog(null,"Se agregó la pelicula: "+pelicula.getTitulo());
+       controlPelicula cPeli=new controlPelicula();
+        if (cPeli.insertar(pelicula)) {
+         JOptionPane.showMessageDialog(null,"Se agregó la pelicula: "+pelicula.getTitulo(),"Info",JOptionPane.INFORMATION_MESSAGE);   
+        }else{
+        JOptionPane.showMessageDialog(null, "No se agregó la pelicula: "+pelicula.getTitulo(),"Error",JOptionPane.ERROR_MESSAGE);
+        }
+   
    }
    
     
