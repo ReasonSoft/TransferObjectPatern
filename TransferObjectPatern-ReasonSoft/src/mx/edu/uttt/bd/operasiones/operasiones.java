@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package mx.edu.uttt.bd.operasiones;
-
 import java.util.ArrayList;
+import mx.edu.uttt.transfer.peliculasVO;
 
 /**
  *
@@ -18,5 +18,5 @@ public interface operasiones {
     
     boolean actualizar (Object obj);
     
-     ArrayList<Object> consultarTodo();
+     ArrayList<peliculasVO> consultarTodo();
 }
