@@ -22,8 +22,13 @@ List<peliculasVO> peli;
     }
     
     public void deletePeliculas(peliculasVO pelicula){
+        controlPelicula cPeli=new controlPelicula();
+        if ( cPeli.eliminar(pelicula)) {
+            JOptionPane.showMessageDialog(null, "Se eliminó la pelicula: "+pelicula.getTitulo());
+        }else{
+        JOptionPane.showMessageDialog(null, "No se eliminó la pelicula: "+pelicula.getTitulo());
+        }
         
-        JOptionPane.showMessageDialog(null, "Se eliminó la pelicula: "+pelicula.getTitulo());
     }
    public ArrayList<peliculasVO> getAllPeliculasVO(){
        controlPelicula cPeli=new controlPelicula();
@@ -31,7 +36,12 @@ List<peliculasVO> peli;
     return cPeli.consultarTodo();
     }
    public void updatePelicula(peliculasVO pelicula){
-   JOptionPane.showMessageDialog(null,"Se actualizó la pelicula: "+pelicula.getTitulo() );
+       controlPelicula cPeli=new controlPelicula();
+       if (cPeli.actualizar(pelicula)) {
+            JOptionPane.showMessageDialog(null,"Se actualizó la pelicula: "+pelicula.getTitulo() );
+       }else{
+   JOptionPane.showMessageDialog(null,"No se actualizó la pelicula: "+pelicula.getTitulo() );
+       }
     }
    public void addPelicula(peliculasVO pelicula){
        controlPelicula cPeli=new controlPelicula();
