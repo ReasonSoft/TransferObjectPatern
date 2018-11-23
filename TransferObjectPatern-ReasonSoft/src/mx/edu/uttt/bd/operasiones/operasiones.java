@@ -5,13 +5,18 @@
  */
 package mx.edu.uttt.bd.operasiones;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author crist
  */
 public interface operasiones {
      boolean insertar (Object obj);
+     
     boolean eliminar (Object obj);
+    
     boolean actualizar (Object obj);
     
+     ArrayList<Object> consultarTodo();
 }
