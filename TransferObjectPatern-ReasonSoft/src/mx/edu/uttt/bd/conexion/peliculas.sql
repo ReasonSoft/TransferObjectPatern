@@ -18,7 +18,8 @@
 --
 -- Table structure for table `tablapelicula`
 --
-
+CREATE DATABASE peliculas;
+use peliculas;
 DROP TABLE IF EXISTS `tablapelicula`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
