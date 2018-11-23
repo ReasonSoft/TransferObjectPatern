@@ -18,15 +18,6 @@ public class peliculasVO {
     private double precio;
     private int stock;
 
-    public peliculasVO(int id, String titulo, String genero, String descripcion, double precio, int stock) {
-        this.id = id;
-        this.titulo = titulo;
-        this.genero = genero;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.stock = stock;
-    }
-
     public int getId() {
         return id;
     }
