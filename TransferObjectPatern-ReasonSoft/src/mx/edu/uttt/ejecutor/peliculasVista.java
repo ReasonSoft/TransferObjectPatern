@@ -5,17 +5,49 @@
  */
 package mx.edu.uttt.ejecutor;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import mx.edu.uttt.busines.peliculaBO;
+import mx.edu.uttt.transfer.peliculasVO;
+
 /**
  *
  * @author crist
  */
 public class peliculasVista extends javax.swing.JFrame {
 
+    DefaultTableModel tabPeliculas;
+    int id;
+
     /**
      * Creates new form peliculasVista
      */
     public peliculasVista() {
         initComponents();
+        llenarTabla();
+        btnEliminar.setVisible(false);
+        
+        this.setLocationRelativeTo(null);
+        this.setTitle("TransferObject");
+
+        tabPeliculas = new DefaultTableModel();
+        tabPeliculas.addColumn("id");
+        tabPeliculas.addColumn("Titulo");
+        tabPeliculas.addColumn("Genero");
+        tabPeliculas.addColumn("Descripcion");
+        tabPeliculas.addColumn("Precio");
+        tabPeliculas.addColumn("Stock");
+        this.TbPeliculas.setModel(tabPeliculas);
+    }
+    
+    public void llenarTabla() {
+//        TbPeliculas.setModel(tabPeliculas);
+        peliculaBO peliBO = new peliculaBO();
+        ArrayList<peliculasVO>List = (ArrayList<peliculasVO>)(peliBO.getAllPeliculasVO());
+        
+        for (int i=0; i<List.size(); i++){
+            tabPeliculas.addRow(new Object[]{List.get(i).getId(),List.get(i).getTitulo(),List.get(i).getGenero(),List.get(i).getDescripcion(),List.get(i).getPrecio(),List.get(i).getStock()});
+        }
     }
 
     /**
@@ -27,21 +59,182 @@ public class peliculasVista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jColorChooser1 = new javax.swing.JColorChooser();
+        btnIngresar = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jPanel1 = new javax.swing.JPanel();
+        txtGenero = new javax.swing.JTextField();
+        txtPrecio = new javax.swing.JTextField();
+        lbStock = new javax.swing.JLabel();
+        txtPelicula = new javax.swing.JLabel();
+        txtStock = new javax.swing.JTextField();
+        lbId = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TbPeliculas = new javax.swing.JTable();
+        lbTitulo = new javax.swing.JLabel();
+        lbGenero = new javax.swing.JLabel();
+        lbPrecio = new javax.swing.JLabel();
+        lbDescripcion = new javax.swing.JLabel();
+        btnEditar = new javax.swing.JButton();
+        txtId = new javax.swing.JTextField();
+        txtTitulo = new javax.swing.JTextField();
+        btnEliminar = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JSeparator();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txaDescripcion = new javax.swing.JTextArea();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnIngresar.setText("Ingresar");
+        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, -1, -1));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+
+        jPanel1.setLayout(null);
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 0, 0));
+        getContentPane().add(txtGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 230, -1));
+        getContentPane().add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 113, -1));
+
+        lbStock.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        lbStock.setForeground(new java.awt.Color(0, 0, 102));
+        lbStock.setText("Stock");
+        getContentPane().add(lbStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, -1, -1));
+
+        txtPelicula.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
+        txtPelicula.setForeground(new java.awt.Color(153, 0, 0));
+        txtPelicula.setText("Peliculas");
+        getContentPane().add(txtPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, -1, -1));
+        getContentPane().add(txtStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, 46, -1));
+
+        lbId.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        lbId.setForeground(new java.awt.Color(0, 0, 102));
+        lbId.setText("Id");
+        getContentPane().add(lbId, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, -1, -1));
+
+        TbPeliculas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        TbPeliculas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TbPeliculasMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(TbPeliculas);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 483, 250));
+
+        lbTitulo.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        lbTitulo.setForeground(new java.awt.Color(0, 0, 102));
+        lbTitulo.setText("Titulo");
+        getContentPane().add(lbTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
+
+        lbGenero.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        lbGenero.setForeground(new java.awt.Color(0, 0, 102));
+        lbGenero.setText("Genero");
+        getContentPane().add(lbGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
+
+        lbPrecio.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        lbPrecio.setForeground(new java.awt.Color(0, 0, 102));
+        lbPrecio.setText("Precio");
+        getContentPane().add(lbPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, -1));
+
+        lbDescripcion.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        lbDescripcion.setForeground(new java.awt.Color(0, 0, 102));
+        lbDescripcion.setText("Descripción");
+        getContentPane().add(lbDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
+
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, -1, -1));
+        getContentPane().add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 230, -1));
+        getContentPane().add(txtTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 230, -1));
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 370, -1, -1));
+        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 830, -1));
+
+        txaDescripcion.setColumns(20);
+        txaDescripcion.setRows(5);
+        jScrollPane2.setViewportView(txaDescripcion);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 230, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        peliculaBO peli = new peliculaBO();
+        peliculasVO pelivo = new peliculasVO();
+        pelivo.setId(Integer.parseInt(txtId.getText()));
+        pelivo.setTitulo(txtTitulo.getText());
+        pelivo.setGenero(txtGenero.getText());
+        pelivo.setDescripcion(txaDescripcion.getText());
+        pelivo.setPrecio(Double.parseDouble(txtPrecio.getText()));
+        pelivo.setStock(Integer.parseInt(txtStock.getText()));
+ 
+        peli.addPelicula(pelivo);
+    }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        peliculaBO peli = new peliculaBO();
+        peliculasVO pelivo = new peliculasVO();
+        pelivo.setId(Integer.parseInt(txtId.getText()));
+        pelivo.setTitulo(txtTitulo.getText());
+        pelivo.setGenero(txtGenero.getText());
+        pelivo.setDescripcion(txaDescripcion.getText());
+        pelivo.setPrecio(Double.parseDouble(txtPrecio.getText()));
+        pelivo.setStock(Integer.parseInt(txtStock.getText()));
+ 
+        peli.updatePelicula(pelivo);
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        
+        peliculaBO pelibo = new peliculaBO();
+        peliculasVO pelivo = new peliculasVO();
+        pelivo.setId(Integer.parseInt(txtId.getText()));
+        pelivo.setTitulo(txtTitulo.getText());
+        pelivo.setGenero(txtGenero.getText());
+        pelivo.setDescripcion(txaDescripcion.getText());
+        pelivo.setPrecio(Double.parseDouble(txtPrecio.getText()));
+        pelivo.setStock(Integer.parseInt(txtStock.getText()));
+        pelibo.deletePeliculas(pelivo);
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void TbPeliculasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbPeliculasMouseClicked
+        btnEliminar.setVisible(true);
+        int fila= TbPeliculas.getSelectedRow();
+        txtId.setText(TbPeliculas.getValueAt(fila, 0).toString());
+        txtTitulo.setText(TbPeliculas.getValueAt(fila, 1).toString());
+        txtGenero.setText(TbPeliculas.getValueAt(fila, 2).toString());
+        txaDescripcion.setText(TbPeliculas.getValueAt(fila, 3).toString());
+        txtPrecio.setText(TbPeliculas.getValueAt(fila, 4).toString());
+        txtStock.setText(TbPeliculas.getValueAt(fila, 5).toString());
+    }//GEN-LAST:event_TbPeliculasMouseClicked
 
     /**
      * @param args the command line arguments
@@ -79,5 +272,29 @@ public class peliculasVista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TbPeliculas;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnIngresar;
+    private javax.swing.JColorChooser jColorChooser1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JLabel lbDescripcion;
+    private javax.swing.JLabel lbGenero;
+    private javax.swing.JLabel lbId;
+    private javax.swing.JLabel lbPrecio;
+    private javax.swing.JLabel lbStock;
+    private javax.swing.JLabel lbTitulo;
+    private javax.swing.JTextArea txaDescripcion;
+    private javax.swing.JTextField txtGenero;
+    private javax.swing.JTextField txtId;
+    private javax.swing.JLabel txtPelicula;
+    private javax.swing.JTextField txtPrecio;
+    private javax.swing.JTextField txtStock;
+    private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables
 }
