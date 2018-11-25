@@ -22,15 +22,16 @@ public class controlPelicula extends conexion implements operasiones{
     @Override
     public boolean insertar(Object obj) {
         peliculasVO peli=(peliculasVO)(obj);
-        String query="insert into tablapelicula values(?,?,?,?,?)";
+        String query="insert into tablapelicula values(?,?,?,?,?,?)";
         try{
             Connection con=super.obtenerConexion();
             PreparedStatement ps =con.prepareStatement(query);
-            ps.setString(1, peli.getTitulo());
-            ps.setString(2, peli.getGenero());
-            ps.setString(3, peli.getDescripcion());
-            ps.setDouble(4, peli.getPrecio());
-            ps.setInt(5, peli.getStock());
+            ps.setInt(1, peli.getId());
+            ps.setString(2, peli.getTitulo());
+            ps.setString(3, peli.getGenero());
+            ps.setString(4, peli.getDescripcion());
+            ps.setDouble(5, peli.getPrecio());
+            ps.setInt(6, peli.getStock());
             ps.executeUpdate();
             System.out.println(ps);
             return true;
