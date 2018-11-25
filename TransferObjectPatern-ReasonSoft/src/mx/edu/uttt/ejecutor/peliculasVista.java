@@ -16,7 +16,7 @@ import mx.edu.uttt.transfer.peliculasVO;
  */
 public class peliculasVista extends javax.swing.JFrame {
 
-    DefaultTableModel tabPeliculas;
+    DefaultTableModel tabPeliculas=new DefaultTableModel();
     int id;
 
     /**
@@ -26,27 +26,44 @@ public class peliculasVista extends javax.swing.JFrame {
         initComponents();
         llenarTabla();
         btnEliminar.setVisible(false);
-        
+        btnEditar.setVisible(false);
         this.setLocationRelativeTo(null);
         this.setTitle("TransferObject");
 
-        tabPeliculas = new DefaultTableModel();
-        tabPeliculas.addColumn("id");
-        tabPeliculas.addColumn("Titulo");
-        tabPeliculas.addColumn("Genero");
-        tabPeliculas.addColumn("Descripcion");
-        tabPeliculas.addColumn("Precio");
-        tabPeliculas.addColumn("Stock");
-        this.TbPeliculas.setModel(tabPeliculas);
+//        tabPeliculas = new DefaultTableModel();
+//        tabPeliculas.addColumn("id");
+//        tabPeliculas.addColumn("Titulo");
+//        tabPeliculas.addColumn("Genero");
+//        tabPeliculas.addColumn("Descripcion");
+//        tabPeliculas.addColumn("Precio");
+//        tabPeliculas.addColumn("Stock");
+//        this.TbPeliculas.setModel(tabPeliculas);
     }
-    
+    public void limpiarTabla(){
+    int fila=TbPeliculas.getRowCount();
+        for (int i = 0; i < fila; i++) {
+            tabPeliculas.removeRow(0);
+        }
+    }
+    public void limpiarCampos(){
+txtId.setText(null);
+        txtTitulo.setText(null);
+        txtGenero.setText(null);
+        txaDescripcion.setText(null);
+        txtPrecio.setText(null);
+        txtStock.setText(null);
+}
     public void llenarTabla() {
-//        TbPeliculas.setModel(tabPeliculas);
+
+   tabPeliculas.setColumnIdentifiers(new String[]{"ID producto","Nombre","Precio","Stock","Categoria","Proveedor"});
+   TbPeliculas.setModel(tabPeliculas);
         peliculaBO peliBO = new peliculaBO();
         ArrayList<peliculasVO>List = (ArrayList<peliculasVO>)(peliBO.getAllPeliculasVO());
         
-        for (int i=0; i<List.size(); i++){
-            tabPeliculas.addRow(new Object[]{List.get(i).getId(),List.get(i).getTitulo(),List.get(i).getGenero(),List.get(i).getDescripcion(),List.get(i).getPrecio(),List.get(i).getStock()});
+        for (int i = 0; i < List.size(); i++){
+            tabPeliculas.addRow(new Object[]{List.get(i).getId(),List.get(i).getTitulo()
+                    ,List.get(i).getGenero(),List.get(i).getDescripcion()
+                    ,List.get(i).getPrecio(),List.get(i).getStock()});
         }
     }
 
@@ -85,7 +102,6 @@ public class peliculasVista extends javax.swing.JFrame {
         txaDescripcion = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnIngresar.setText("Ingresar");
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
@@ -93,30 +109,20 @@ public class peliculasVista extends javax.swing.JFrame {
                 btnIngresarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, -1, -1));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
-        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
 
         jPanel1.setLayout(null);
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 0, 0));
-        getContentPane().add(txtGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 230, -1));
-        getContentPane().add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 113, -1));
 
         lbStock.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         lbStock.setForeground(new java.awt.Color(0, 0, 102));
         lbStock.setText("Stock");
-        getContentPane().add(lbStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, -1, -1));
 
         txtPelicula.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
         txtPelicula.setForeground(new java.awt.Color(153, 0, 0));
         txtPelicula.setText("Peliculas");
-        getContentPane().add(txtPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, -1, -1));
-        getContentPane().add(txtStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, 46, -1));
 
         lbId.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         lbId.setForeground(new java.awt.Color(0, 0, 102));
         lbId.setText("Id");
-        getContentPane().add(lbId, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, -1, -1));
 
         TbPeliculas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -136,27 +142,21 @@ public class peliculasVista extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(TbPeliculas);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 483, 250));
-
         lbTitulo.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         lbTitulo.setForeground(new java.awt.Color(0, 0, 102));
         lbTitulo.setText("Titulo");
-        getContentPane().add(lbTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
 
         lbGenero.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         lbGenero.setForeground(new java.awt.Color(0, 0, 102));
         lbGenero.setText("Genero");
-        getContentPane().add(lbGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
         lbPrecio.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         lbPrecio.setForeground(new java.awt.Color(0, 0, 102));
         lbPrecio.setText("Precio");
-        getContentPane().add(lbPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, -1));
 
         lbDescripcion.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         lbDescripcion.setForeground(new java.awt.Color(0, 0, 102));
         lbDescripcion.setText("Descripción");
-        getContentPane().add(lbDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
 
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -164,9 +164,6 @@ public class peliculasVista extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, -1, -1));
-        getContentPane().add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 230, -1));
-        getContentPane().add(txtTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 230, -1));
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -174,14 +171,115 @@ public class peliculasVista extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 370, -1, -1));
-        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 830, -1));
 
         txaDescripcion.setColumns(20);
         txaDescripcion.setRows(5);
         jScrollPane2.setViewportView(txaDescripcion);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 230, -1));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(310, 310, 310)
+                        .addComponent(txtPelicula))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(lbId))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(lbTitulo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(lbGenero))
+                    .addComponent(lbDescripcion)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(lbPrecio)))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17)
+                        .addComponent(lbStock)
+                        .addGap(15, 15, 15)
+                        .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(230, 230, 230)
+                .addComponent(btnIngresar)
+                .addGap(107, 107, 107)
+                .addComponent(btnEditar)
+                .addGap(109, 109, 109)
+                .addComponent(btnEliminar))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPelicula))
+                .addGap(6, 6, 6)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbId)
+                        .addGap(13, 13, 13)
+                        .addComponent(lbTitulo)
+                        .addGap(23, 23, 23)
+                        .addComponent(lbGenero)
+                        .addGap(23, 23, 23)
+                        .addComponent(lbDescripcion)
+                        .addGap(103, 103, 103)
+                        .addComponent(lbPrecio))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbStock)
+                            .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnIngresar)
+                    .addComponent(btnEditar)
+                    .addComponent(btnEliminar)))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -197,9 +295,15 @@ public class peliculasVista extends javax.swing.JFrame {
         pelivo.setStock(Integer.parseInt(txtStock.getText()));
  
         peli.addPelicula(pelivo);
+        limpiarTabla();
+        llenarTabla();
+        limpiarCampos();
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        txtId.enable(true);
+        btnEditar.setVisible(false);
+        btnEliminar.setVisible(false);
         peliculaBO peli = new peliculaBO();
         peliculasVO pelivo = new peliculasVO();
         pelivo.setId(Integer.parseInt(txtId.getText()));
@@ -210,10 +314,15 @@ public class peliculasVista extends javax.swing.JFrame {
         pelivo.setStock(Integer.parseInt(txtStock.getText()));
  
         peli.updatePelicula(pelivo);
+        limpiarTabla();
+        llenarTabla();
+        limpiarCampos();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        
+        txtId.enable(true);
+        btnEditar.setVisible(false);
+        btnEliminar.setVisible(false);
         peliculaBO pelibo = new peliculaBO();
         peliculasVO pelivo = new peliculasVO();
         pelivo.setId(Integer.parseInt(txtId.getText()));
@@ -223,9 +332,14 @@ public class peliculasVista extends javax.swing.JFrame {
         pelivo.setPrecio(Double.parseDouble(txtPrecio.getText()));
         pelivo.setStock(Integer.parseInt(txtStock.getText()));
         pelibo.deletePeliculas(pelivo);
+        limpiarTabla();
+        llenarTabla();
+        limpiarCampos();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void TbPeliculasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbPeliculasMouseClicked
+txtId.enable(false);
+btnEditar.setVisible(true);
         btnEliminar.setVisible(true);
         int fila= TbPeliculas.getSelectedRow();
         txtId.setText(TbPeliculas.getValueAt(fila, 0).toString());
